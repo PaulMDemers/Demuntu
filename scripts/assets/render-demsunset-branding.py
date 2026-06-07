@@ -215,47 +215,69 @@ def svg_doc(body: str) -> str:
 
 def folder_svg(glyph: str = "") -> str:
     return svg_doc(
-        '  <path d="M7 19h18l5 6h27v8H7z" fill="#4a4a52"/>\n'
-        '  <path d="M7 27h50v26H7z" fill="#303138"/>\n'
-        '  <path d="M7 27h50v26H7z" fill="none" stroke="#d7dadd" '
-        'stroke-width="2.5" stroke-linejoin="round"/>\n'
-        '  <path d="M12 34h40v14H12z" fill="#ef7d35"/>\n'
-        '  <path d="M12 44h40v4H12z" fill="#ec5c86"/>\n'
+        '  <path d="M7 20h18l5 5h27v7H7z" fill="#55565f"/>\n'
+        '  <path d="M6 28h52v24H6z" fill="#2f3038"/>\n'
+        '  <path d="M6 28h52v5H6z" fill="#ef7d35"/>\n'
+        '  <path d="M6 48h52v4H6z" fill="#ec5c86"/>\n'
+        '  <path d="M6 28h52v24H6z" fill="none" stroke="#d7dadd" '
+        'stroke-width="1.75" stroke-linejoin="round"/>\n'
         f"{glyph}"
     )
 
 
 def home_svg() -> str:
     return svg_doc(
-        '  <path d="M9 32 32 13l23 19-4 5-19-16-19 16z" fill="#ef7d35"/>\n'
-        '  <path d="M16 31h32v24H16z" fill="#303138" stroke="#d7dadd" '
-        'stroke-width="2.5" stroke-linejoin="round"/>\n'
-        '  <path d="M27 42h10v13H27z" fill="#ec5c86"/>\n'
-        '  <path d="M21 35h9v7h-9zM34 35h9v7h-9z" fill="#4a4a52"/>'
+        '  <path d="M9 33 32 15l23 18-4 5-19-15-19 15z" fill="#ef7d35"/>\n'
+        '  <path d="M16 32h32v22H16z" fill="#2f3038"/>\n'
+        '  <path d="M16 32h32v5H16z" fill="#55565f"/>\n'
+        '  <path d="M27 42h10v12H27z" fill="#ec5c86"/>\n'
+        '  <path d="M21 38h8v7h-8zM35 38h8v7h-8z" fill="#d7dadd"/>'
     )
 
 
 def trash_svg(full: bool) -> str:
-    fill = "#ec5c86" if full else "#4a4a52"
-    inner = '  <path d="M22 30h20v18H22z" fill="#ef7d35"/>\n' if full else ""
+    fill = "#ec5c86" if full else "#3b3c44"
+    inner = '  <path d="M22 31h20v17H22z" fill="#ef7d35"/>\n' if full else ""
     return svg_doc(
-        '  <path d="M22 13h20l2 5h9v6H11v-6h9z" fill="#d7dadd"/>\n'
+        '  <path d="M22 14h20l2 5h9v5H11v-5h9z" fill="#d7dadd"/>\n'
         f'  <path d="M16 24h32l-3 29H19z" fill="{fill}" stroke="#d7dadd" '
-        'stroke-width="2.5" stroke-linejoin="round"/>\n'
+        'stroke-width="1.75" stroke-linejoin="round"/>\n'
         f"{inner}"
         '  <path d="M25 30v17M32 30v17M39 30v17" stroke="#303138" '
-        'stroke-width="3" stroke-linecap="round"/>'
+        'stroke-width="2.5" stroke-linecap="round"/>'
     )
 
 
 def computer_svg() -> str:
     return svg_doc(
-        '  <path d="M10 13h44v31H10z" fill="#303138" stroke="#d7dadd" '
-        'stroke-width="2.5" stroke-linejoin="round"/>\n'
+        '  <path d="M10 14h44v30H10z" fill="#2f3038" stroke="#d7dadd" '
+        'stroke-width="1.75" stroke-linejoin="round"/>\n'
         '  <path d="M15 18h34v20H15z" fill="#1b1c22"/>\n'
         '  <path d="M18 34h28v4H18z" fill="#ef7d35"/>\n'
         '  <path d="M26 44h12l2 7h7v4H17v-4h7z" fill="#4a4a52"/>\n'
         '  <path d="M20 29h24v3H20z" fill="#ec5c86"/>'
+    )
+
+
+def file_system_svg() -> str:
+    return svg_doc(
+        '  <path d="M13 18h38v30H13z" fill="#2f3038" stroke="#d7dadd" '
+        'stroke-width="1.75" stroke-linejoin="round"/>\n'
+        '  <path d="M13 18h38v7H13z" fill="#55565f"/>\n'
+        '  <path d="M19 32h26v4H19z" fill="#ef7d35"/>\n'
+        '  <path d="M19 40h18v4H19z" fill="#ec5c86"/>'
+    )
+
+
+def network_svg() -> str:
+    return svg_doc(
+        '  <rect x="25" y="12" width="14" height="12" rx="2" fill="#d7dadd"/>\n'
+        '  <rect x="10" y="40" width="14" height="12" rx="2" fill="#ef7d35"/>\n'
+        '  <rect x="40" y="40" width="14" height="12" rx="2" fill="#ec5c86"/>\n'
+        '  <path d="M32 24v8M17 40v-8h30v8" fill="none" stroke="#d7dadd" '
+        'stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>\n'
+        '  <path d="M13 45h8M43 45h8M28 17h8" stroke="#2f3038" stroke-width="2" '
+        'stroke-linecap="round"/>'
     )
 
 
@@ -318,6 +340,35 @@ def category_svg(kind: str) -> str:
     )
 
 
+def volume_svg(level: str, symbolic: bool = False) -> str:
+    fg = "#f2f0ef" if not symbolic else "#ffffff"
+    accent = "#ec5c86" if level in {"muted", "off"} else "#ef7d35"
+    waves = {
+        "low": 1,
+        "medium": 2,
+        "high": 3,
+    }.get(level, 0)
+    body = [
+        f'  <path d="M11 27h10l14-12v34L21 37H11z" fill="{fg}"/>',
+        f'  <path d="M22 28v8l9 7V21z" fill="{accent}"/>',
+    ]
+    if level in {"muted", "off"}:
+        body.extend(
+            [
+                f'  <path d="M43 25 55 39M55 25 43 39" stroke="{fg}" stroke-width="5" stroke-linecap="round"/>',
+                f'  <path d="M43 25 55 39" stroke="{accent}" stroke-width="2" stroke-linecap="round"/>',
+            ]
+        )
+    else:
+        if waves >= 1:
+            body.append(f'  <path d="M41 27c3 3 3 7 0 10" fill="none" stroke="{fg}" stroke-width="4" stroke-linecap="round"/>')
+        if waves >= 2:
+            body.append(f'  <path d="M47 22c6 6 6 15 0 21" fill="none" stroke="{fg}" stroke-width="4" stroke-linecap="round"/>')
+        if waves >= 3:
+            body.append(f'  <path d="M53 17c9 9 9 24 0 33" fill="none" stroke="{fg}" stroke-width="4" stroke-linecap="round"/>')
+    return svg_doc("\n".join(body))
+
+
 def write_demsunset_icons(package_root: Path) -> None:
     icon_root = package_root / "usr/share/icons/DemSunset/scalable"
     place_glyphs = {
@@ -353,6 +404,13 @@ def write_demsunset_icons(package_root: Path) -> None:
     write_text(icon_root / "places/user-trash.svg", trash_svg(False))
     write_text(icon_root / "places/user-trash-full.svg", trash_svg(True))
     write_text(icon_root / "devices/computer.svg", computer_svg())
+    write_text(icon_root / "devices/drive-harddisk.svg", file_system_svg())
+    write_text(icon_root / "devices/drive-harddisk-system.svg", file_system_svg())
+    write_text(icon_root / "devices/network-server.svg", network_svg())
+    write_text(icon_root / "places/drive-harddisk.svg", file_system_svg())
+    write_text(icon_root / "places/drive-harddisk-system.svg", file_system_svg())
+    write_text(icon_root / "places/network-server.svg", network_svg())
+    write_text(icon_root / "places/network-workgroup.svg", network_svg())
     write_text(icon_root / "apps/start-here.svg", start_here_svg())
     write_text(icon_root / "apps/distributor-logo-demuntu.svg", app_logo_svg("D"))
 
@@ -375,6 +433,18 @@ def write_demsunset_icons(package_root: Path) -> None:
     }
     for name, kind in category_map.items():
         write_text(icon_root / "categories" / name, category_svg(kind))
+
+    status_levels = {
+        "audio-volume-muted.svg": "muted",
+        "audio-volume-off.svg": "off",
+        "audio-volume-low.svg": "low",
+        "audio-volume-medium.svg": "medium",
+        "audio-volume-high.svg": "high",
+    }
+    for name, level in status_levels.items():
+        write_text(icon_root / "status" / name, volume_svg(level))
+        symbolic_name = name.replace(".svg", "-symbolic.svg")
+        write_text(icon_root / "status" / symbolic_name, volume_svg(level, symbolic=True))
 
 
 def main() -> int:
